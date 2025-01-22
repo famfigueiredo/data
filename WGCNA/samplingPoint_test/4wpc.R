@@ -13,11 +13,16 @@ suppressPackageStartupMessages({
   register(MulticoreParam(10))
 })
 
+# clone repo in your Terminal (no '')
+'git clone https://github.com/famfigueiredo/data.git'
+
+# point to readcount directory
 directory <-
-  '~/Documents/PhD/Thesis/quantseq_dataAnalysis/deseq2_dataAnalysis_2024/full_dataset/readcounts'
+  '~/readcounts/full_dataset'
 
 # Heart ----
-load(file = '~/Documents/PhD/Papers/Paper III/data/RData/sampleTable_heart_group.RData')  # heart sampleTable
+# load sampleTable
+load(file = '~/RData/sampleTables/sampleTable_heart_group.RData')  # heart sampleTable
 
 # creating dds object by selecting treatments of interest, sampling point, and relevant columns
 sampleTable_4wpc <-
@@ -32,68 +37,6 @@ sampleTable_4wpc$treatment <- droplevels(sampleTable_4wpc$treatment)  # dropping
 levels(sampleTable_4wpc$treatment) <- c('conu', 'ivld', 'eomes', 'gata3')  # re-setting treatment levels
 
 sampleTable_4wpc$sample <- paste0("s", sampleTable_4wpc$sample)  # adding 's' to sample name
-
-# reprex sampleTable
-sampleTable_4wpc <- data.frame(
-  stringsAsFactors = FALSE,
-                           sample = c("s1_conu_4wpc_h","s48_conu_4wpc_h",
-                                      "s51_ivld_4wpc_h","s52_eomes_4wpc_h",
-                                      "s53_gata3_4wpc_h","s68_ivld_4wpc_h",
-                                      "s79_ivld_4wpc_h","s90_ivld_4wpc_h",
-                                      "s101_ivld_4wpc_h","s119_conu_4wpc_h","s120_ivld_4wpc_h",
-                                      "s141_eomes_4wpc_h","s162_eomes_4wpc_h",
-                                      "s183_eomes_4wpc_h","s204_eomes_4wpc_h",
-                                      "s225_eomes_4wpc_h","s246_gata3_4wpc_h",
-                                      "s267_gata3_4wpc_h","s288_gata3_4wpc_h",
-                                      "s309_gata3_4wpc_h","s330_conu_4wpc_h",
-                                      "s331_gata3_4wpc_h","s541_conu_4wpc_h",
-                                      "s655_conu_4wpc_h"),
-                         filename = c("1_conu_4wpc_h1_L1_readcount.txt",
-                                      "141_conu_4wpc_h6_L2_readcount.txt",
-                                      "144_ivld_4wpc_h6_L2_readcount.txt",
-                                      "145_eomes_4wpc_h6_L2_readcount.txt",
-                                      "146_gata3_4wpc_h6_L2_readcount.txt",
-                                      "16_ivld_4wpc_h1_L1_readcount.txt",
-                                      "17_ivld_4wpc_h2_L1_readcount.txt","18_ivld_4wpc_h3_L1_readcount.txt",
-                                      "19_ivld_4wpc_h4_L1_readcount.txt",
-                                      "2_conu_4wpc_h2_L1_readcount.txt",
-                                      "20_ivld_4wpc_h5_L1_readcount.txt",
-                                      "21_eomes_4wpc_h1_L1_readcount.txt",
-                                      "22_eomes_4wpc_h2_L1_readcount.txt",
-                                      "23_eomes_4wpc_h3_L1_readcount.txt","24_eomes_4wpc_h4_L1_readcount.txt",
-                                      "25_eomes_4wpc_h5_L1_readcount.txt",
-                                      "26_gata3_4wpc_h1_L1_readcount.txt",
-                                      "27_gata3_4wpc_h2_L1_readcount.txt",
-                                      "28_gata3_4wpc_h3_L1_readcount.txt",
-                                      "29_gata3_4wpc_h4_L1_readcount.txt",
-                                      "3_conu_4wpc_h3_L1_readcount.txt",
-                                      "30_gata3_4wpc_h5_L1_readcount.txt","4_conu_4wpc_h4_L1_readcount.txt",
-                                      "5_conu_4wpc_h5_L1_readcount.txt"),
-                                n = c("1","141","144","145","146","16","17",
-                                      "18","19","2","20","21","22","23",
-                                      "24","25","26","27","28","29","3",
-                                      "30","4","5"),
-                        treatment = as.factor(c("conu",
-                                                "conu","gata3","ivld","eomes",
-                                                "gata3","gata3","gata3","gata3",
-                                                "conu","gata3","ivld","ivld",
-                                                "ivld","ivld","ivld",
-                                                "eomes","eomes","eomes","eomes",
-                                                "conu","eomes","conu","conu")),
-                    samplingPoint = as.factor(c("4wpc",
-                                                "4wpc","4wpc","4wpc","4wpc",
-                                                "4wpc","4wpc","4wpc","4wpc",
-                                                "4wpc","4wpc","4wpc","4wpc",
-                                                "4wpc","4wpc","4wpc","4wpc",
-                                                "4wpc","4wpc","4wpc","4wpc",
-                                                "4wpc","4wpc","4wpc")),
-                             lane = as.factor(c("L1","L2",
-                                                "L2","L2","L2","L1","L1",
-                                                "L1","L1","L1","L1","L1","L1",
-                                                "L1","L1","L1","L1","L1",
-                                                "L1","L1","L1","L1","L1",
-                                                "L1"))
-               )
 
 
 # Creating dds object from sampleTable

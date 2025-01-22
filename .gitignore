@@ -1,0 +1,17 @@
+.Rproj.user
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
+
+
+!readcounts/
+!WGCNA/
+!RData/
+
+RData/ddsDGE_group_spleen.RData
+RData/ddsDGE_group_heart.RData
+
+# Allow the sampleTables directory inside RData
+!RData/sampleTables/
